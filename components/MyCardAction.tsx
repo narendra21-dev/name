@@ -19,6 +19,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth'
+import { router } from 'expo-router';
 
 
 
@@ -31,10 +32,10 @@ const screenWidth = Dimensions.get('window').width;
 
 
 
-GoogleSignin.configure({
-  webClientId: '1000520553015-o5j5fm6nui1ev3v9bid6qheea8d2cs70.apps.googleusercontent.com',
+// GoogleSignin.configure({
+//   webClientId: '1000520553015-o5j5fm6nui1ev3v9bid6qheea8d2cs70.apps.googleusercontent.com',
 
-});
+// });
 
 
 const MyCardAction = () => {
@@ -42,39 +43,41 @@ const MyCardAction = () => {
 
 
   // Somewhere in your code
-  const signInn = async () => {
-    try {
-      console.log("signin mehode");
-      await GoogleSignin.hasPlayServices();
-      const response = await GoogleSignin.signIn();
-      const idToken = response.data?.idToken;
-      console.log(idToken);
-      const googleCreadentials = GoogleAuthProvider.credential(idToken);
-      await signInWithCredential(googleCreadentials);
-      if (isSuccessResponse(response)) {
-        // setState({ userInfo: response.data });
-      } else {
-        // sign in was cancelled by user
-      }
-    } catch (error) {
-      console.log("signin mehode2m error");
-      if (isErrorWithCode(error)) {
-        console.log('got error', error.message);
-        switch (error.code) {
-          case statusCodes.IN_PROGRESS:
-            // operation (eg. sign in) already in progress
-            break;
-          case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-            // Android only, play services not available or outdated
-            break;
-          default:
-          // some other error happened
-        }
-      } else {
-        // an error that's not related to google sign in occurred
-      }
-    }
-  };
+
+
+  // const signInn = async () => {
+  //   try {
+  //     console.log("signin mehode");
+  //     // await GoogleSignin.hasPlayServices();
+  //     const response = await GoogleSignin.signIn();
+  //     const idToken = response.data?.idToken;
+  //     console.log(idToken);
+  //     const googleCreadentials = GoogleAuthProvider.credential(idToken);
+  //     await signInWithCredential(googleCreadentials);
+  //     if (isSuccessResponse(response)) {
+  //       // setState({ userInfo: response.data });
+  //     } else {
+  //       // sign in was cancelled by user
+  //     }
+  //   } catch (error) {
+  //     console.log("signin mehode2m error");
+  //     if (isErrorWithCode(error)) {
+  //       console.log('got error', error.message);
+  //       switch (error.code) {
+  //         case statusCodes.IN_PROGRESS:
+  //           // operation (eg. sign in) already in progress
+  //           break;
+  //         case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
+  //           // Android only, play services not available or outdated
+  //           break;
+  //         default:
+  //         // some other error happened
+  //       }
+  //     } else {
+  //       // an error that's not related to google sign in occurred
+  //     }
+  //   }
+  // };
 
 
 
@@ -122,7 +125,8 @@ const MyCardAction = () => {
         </MaskedView>
         <TouchableOpacity onPress={() => {
           console.log("hello tuch");
-          signInn()
+          // signInn()
+          router.push('/(main)/dashborad');
         }}
           style={{
             alignSelf: 'center', marginVertical: 50

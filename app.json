@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "black"
     },
     "ios": {
       "supportsTablet": true
@@ -36,6 +36,10 @@
     "extra": {
       "eas": {
         "projectId": "ae55c031-7091-4ac5-a5b0-9287761f3441"
+      },
+      "androidStatusBar": {
+        "backgroundColor": "#C2185B",
+        "translucent": false
       }
     }
   }

@@ -6,6 +6,7 @@ const MainStack = () => {
     return (
         <Stack>
             {/* <Stack.Screen name='index' /> */}
+            <Stack.Screen name='dashborad' />
         </Stack>
     )
 }
