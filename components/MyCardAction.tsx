@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image, SafeAreaView, ScrollView } from 'react-native'
 
 
 import { Dimensions } from 'react-native';
@@ -19,17 +19,12 @@ import {
 } from '@react-native-google-signin/google-signin';
 
 import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth'
-import { router } from 'expo-router';
-
-
+import { router, SplashScreen } from 'expo-router';
 
 
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
-
-
-
 
 
 // GoogleSignin.configure({
@@ -40,10 +35,7 @@ const screenWidth = Dimensions.get('window').width;
 
 const MyCardAction = () => {
 
-
-
   // Somewhere in your code
-
 
   // const signInn = async () => {
   //   try {
@@ -79,76 +71,89 @@ const MyCardAction = () => {
   //   }
   // };
 
+  // Splash screen timer
+  useEffect(() => {
+    const prepare = async () => {
+      // keep splash screen visible
+      await SplashScreen.preventAutoHideAsync()
+
+      // pre-load your stuff
+      await new Promise(resolve => setTimeout(resolve, 5000))
+
+      // hide splash screen
+      await SplashScreen.hideAsync()
+    }
+    prepare()
+  }, [])
 
 
   return (
-    <View style={styles.container1}>
-      <View style={styles.container2}>
 
-        <View>
-          <Image style={styles.card} source={require('../assets/images/splash.png')} />
-        </View>
-        <MaskedView
-          style={{
-            flex: 1, flexDirection: 'row', height: '100%',
-            marginTop: -100
-          }}
-          maskElement={
-            <View
-              style={{
-                // Transparent background because mask is based off alpha channel.
-                backgroundColor: 'transparent',
-                alignItems: 'center',
-              }}
-            >
-              <Text
+
+
+    <View style={styles.container1}>
+        <View style={styles.container2}>
+
+          <View>
+            <Image style={styles.card} source={require('../assets/images/splash.png')} />
+          </View>
+          <MaskedView
+            style={{
+              flex: 1, flexDirection: 'row', height: '100%',
+              marginTop: -100
+            }}
+            maskElement={
+              <View
                 style={{
-                  fontSize: 30,
-                  color: 'black',
-                  fontWeight: 'bold',
+                  // Transparent background because mask is based off alpha channel.
+                  backgroundColor: 'transparent',
+                  alignItems: 'center',
                 }}
               >
-                I Can Exploer {"\n"}
-                I Can Fun
-              </Text>
-            </View>
-          }
-        >
+                <Text
+                  style={{
+                    fontSize: 30,
+                    color: 'black',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  I Can Exploer {"\n"}
+                  I Can Fun
+                </Text>
+              </View>
+            }
+          >
 
-          {/* Shows behind the mask, you can put anything here, such as an image */}
-          <View style={{ flex: 1, height: '100%', backgroundColor: '#324376' }} />
-          <View style={{ flex: 1, height: '100%', backgroundColor: '#F5DD90' }} />
-          <View style={{ flex: 1, height: '100%', backgroundColor: '#F76C5E' }} />
-          <View style={{ flex: 1, height: '100%', backgroundColor: '#e1e1e1' }} />
+            {/* Shows behind the mask, you can put anything here, such as an image */}
+            <View style={{ flex: 1, height: '100%', backgroundColor: '#324376' }} />
+            <View style={{ flex: 1, height: '100%', backgroundColor: '#F5DD90' }} />
+            <View style={{ flex: 1, height: '100%', backgroundColor: '#F76C5E' }} />
+            <View style={{ flex: 1, height: '100%', backgroundColor: '#e1e1e1' }} />
 
 
-        </MaskedView>
-        <TouchableOpacity onPress={() => {
-          console.log("hello tuch");
-          // signInn()
-          router.push('/(main)/dashborad');
-        }}
-          style={{
-            alignSelf: 'center', marginVertical: 50
+          </MaskedView>
+          <TouchableOpacity onPress={() => {
+            console.log("hello tuch");
+            // signInn()
+            router.push('/(main)/dashborad');
           }}
-        >
-          <View pointerEvents='none' style={styles.button}>
-            <FontAwesome.Button
-              name="google"
-              backgroundColor='#28282B'
-              size={50}
-            >
-              Sign in with Google
-            </FontAwesome.Button>
-          </View>
-        </TouchableOpacity>
+            style={{
+              alignSelf: 'center', marginVertical: 50
+            }}
+          >
+            <View pointerEvents='none' style={styles.button}>
+              <FontAwesome.Button
+                name="google"
+                backgroundColor='#28282B'
+                size={50}
+              >
+                Sign in with Google
+              </FontAwesome.Button>
+            </View>
+          </TouchableOpacity>
 
-      </View>
-
-
+        </View>
     </View>
-
-
   );
 };
 
@@ -160,7 +165,6 @@ const styles = StyleSheet.create({
     height: screenHeight,
     backgroundColor: '#fff',
     alignItems: 'center',
-    padding: 8,
   },
   container2: {
     width: screenWidth,

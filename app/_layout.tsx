@@ -9,7 +9,7 @@ const RootLayout = () => {
     <>
       {/* <StatusBar backgroundColor="white" barStyle="default" /> */}
       <StatusBar style="light" />
-      <Stack screenOptions={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false, }} />
       {
         isLogin ? (<Redirect href={"/(main)"} />) : (<Redirect href={"/(auth)"} />)
       }
